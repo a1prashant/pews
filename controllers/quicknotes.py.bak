@@ -1,0 +1,5 @@
+# -*- coding: utf-8 -*-
+# try something like
+def quickNotes():
+    grid = SQLFORM.grid(db.contact, user_signature=False)
+    return locals()
