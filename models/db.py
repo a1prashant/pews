@@ -85,6 +85,10 @@ response.form_label_separator = ''
 # (more options discussed in gluon/tools.py)
 # -------------------------------------------------------------------------
 
+auth = Auth(db)
+# auth.define_tables(username=False, signature=False)
+
+
 # host names must be a list of allowed host names (glob syntax allowed)
 auth = Auth(db, host_names=configuration.get('host.names'))
 
@@ -93,6 +97,17 @@ auth = Auth(db, host_names=configuration.get('host.names'))
 # -------------------------------------------------------------------------
 auth.settings.extra_fields['auth_user'] = []
 auth.define_tables(username=False, signature=False)
+
+#####################################################################################
+# Prashant tried this - and it works, but we do NOT want this!
+# from gluon.contrib.login_methods.rpx_account import RPXAccount
+# auth.settings.actions_disabled=['register', 'change_password', 'request_reset_password']
+#auth.settings.login_form = RPXAccount(request,
+#    api_key='----take this again from the janrain.com with prashants account---',
+#    domain='pewsindia',
+#    url = "/%s/default/user/login" % request.application)
+#####################################################################################
+
 
 # -------------------------------------------------------------------------
 # configure email

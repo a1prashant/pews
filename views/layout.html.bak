@@ -35,7 +35,7 @@
       <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
       <script>
   tinymce.init({
-  selector: 'thetextarea',  // change this value according to your HTML
+  selector: '#thetextarea',  // change this value according to your HTML
   toolbar: 'undo redo | styleselect | bold italic | link image',
 });
 
@@ -44,11 +44,11 @@
   <body>
     <div class="w2p_flash alert alert-dismissable">{{=response.flash or ''}}</div>
     <!-- Navbar ======================================= -->
-    <!-- nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="http://web2py.com">web2py</a>
+      <!-- a class="navbar-brand" href="http://web2py.com">web2py</a -->
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav">
           {{for _item in response.menu or []:}}
@@ -84,7 +84,7 @@
               <a class="dropdown-item" href="{{=URL('default','user/logout')}}">{{=T('Logout')}}</a>
               {{else:}}
               <a class="dropdown-item" href="{{=URL('default','user/login')}}">{{=T('Login')}}</a>
-              <a class="dropdown-item" href="{{=URL('default','user/register')}}">{{=T('Sign up')}}</a>
+              <!-- a class="dropdown-item" href="{{=URL('default','user/register')}}">{{=T('Sign up')}}</a -->
               <a class="dropdown-item" href="{{=URL('default','user/request_password')}}">{{=T('Lost Password')}}</a>
               {{pass}}
             </div>
@@ -92,7 +92,7 @@
         </ul>
         {{pass}}
       </div>
-    </nav -->
+    </nav>
 
     <!-- Masthead ===================================== -->    
     {{block header}}
@@ -108,14 +108,14 @@
       </div>
     </div>
 
-    {{block footer}} <!-- this is default footer -->      
+    {{block footer}} <!-- this is default footer -->
     <footer class="footer">
       <div class="container-fluid">
-        <div class="copyright pull-left">{{=T('Copyright')}} &#169; {{=request.now.year}}</div>
-          <div id="poweredBy" class="pull-right">
+        <div class="copyright pull-left">{{=T('Copyrights')}} &#169; {{=request.now.year}}, {{=T('All Rights Reserved by ')}} {{=configuration.get('app.description')}}</div>
+          <!-- div id="poweredBy" class="pull-right">
             {{=T('Powered by')}}
             <a href="http://www.web2py.com/">web2py</a>
-          </div>
+          </div -->
       </div>
     </footer>
     {{end}}
@@ -133,6 +133,6 @@
     </script>
     {{pass}}
     <!-- Share ============================y============ -->
-    <script src="{{=URL('static','js/share.js',vars=dict(static=URL('static','images')))}}"></script>
+    <!-- script src="{{=URL('static','js/share.js',vars=dict(static=URL('static','images')))}}"></script -->
   </body>
 </html>

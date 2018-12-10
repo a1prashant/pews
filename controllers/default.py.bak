@@ -6,19 +6,22 @@
 
 # ---- example index page ----
 def index():
-    response.flash = T("Hello World")
-    return dict(message=T('Welcome to web2py!'))
+    form=FORM('E-Mail address (Registered):', INPUT(_name='email', requires=IS_NOT_EMPTY()),
+              INPUT(_type='submit'))
+    if form.accepts(request,session):
+        response.flash = 'form accepted'
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill the form'
+    return dict(form=form)
 
-def thetextarea():
-    form=FORM('Texto:',
-    TEXTAREA(_name='texto', requires=IS_NOT_EMPTY(),_id='thetextarea'),
-    INPUT(_type='submit'))
-    return locals()
-
+@auth.requires_login()
 def quickNotes():
     grid = SQLFORM.grid(db.quickNotes, user_signature=False)
     return locals()
 
+@auth.requires_login()
 def jobs():
     grid = SQLFORM.grid(db.jobs, user_signature=False)
     return locals()

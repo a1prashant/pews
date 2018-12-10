@@ -6,14 +6,7 @@
 
 # ---- example index page ----
 def index():
-    response.flash = T("Hello World")
-    return dict(message=T('Welcome to web2py!'))
-
-# def thetextarea():
-#    form=FORM('Texto:',
-#    TEXTAREA(_name='texto', requires=IS_NOT_EMPTY(),_id='thetextarea'),
-#    INPUT(_type='submit'))
-#    return locals()
+    return dict(form=auth.login())
 
 @auth.requires_login()
 def quickNotes():
