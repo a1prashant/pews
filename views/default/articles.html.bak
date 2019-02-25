@@ -1,0 +1,7 @@
+{{extend 'layout.html'}}
+<h1>This is the default/articles.html template</h1>
+{{=BEAUTIFY(response._vars)}}
+
+{{extend 'layout.html'}}
+<h1>Articles</h1>
+{{=grid}}

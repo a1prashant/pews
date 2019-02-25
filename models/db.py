@@ -54,7 +54,7 @@ else:
 # by default give a view/generic.extension to all actions from localhost
 # none otherwise. a pattern can be 'controller/function.extension'
 # -------------------------------------------------------------------------
-response.generic_patterns = [] 
+response.generic_patterns = []
 if request.is_local and not configuration.get('app.production'):
     response.generic_patterns.append('*')
 
@@ -108,6 +108,9 @@ auth.define_tables(username=False, signature=False)
 #    url = "/%s/default/user/login" % request.application)
 #####################################################################################
 
+from plugin_ckeditor import CKEditor
+ckeditor = CKEditor(db)
+ckeditor.define_tables()
 
 # -------------------------------------------------------------------------
 # configure email
@@ -126,8 +129,8 @@ auth.settings.registration_requires_verification = False
 auth.settings.registration_requires_approval = False
 auth.settings.reset_password_requires_verification = True
 
-# -------------------------------------------------------------------------  
-# read more at http://dev.w3.org/html5/markup/meta.name.html               
+# -------------------------------------------------------------------------
+# read more at http://dev.w3.org/html5/markup/meta.name.html
 # -------------------------------------------------------------------------
 response.meta.author = configuration.get('app.author')
 response.meta.description = configuration.get('app.description')
@@ -135,7 +138,7 @@ response.meta.keywords = configuration.get('app.keywords')
 response.meta.generator = configuration.get('app.generator')
 
 # -------------------------------------------------------------------------
-# your http://google.com/analytics id                                      
+# your http://google.com/analytics id
 # -------------------------------------------------------------------------
 response.google_analytics_id = configuration.get('google.analytics_id')
 
@@ -251,7 +254,8 @@ db.define_table( 'jobs',
                 , Field( 'description', 'string'
                         , required=True
                         , requires=IS_NOT_EMPTY()
-                        , widget=SQLFORM.widgets.text.widget
+                        , widget=ckeditor.widget, represent=lambda content, row: XML(content, sanitize=True)
+                        # , widget=SQLFORM.widgets.text.widget
                         )
                 , Field('created_on', 'datetime'
                     , default=request.now
@@ -299,7 +303,7 @@ db.define_table( 'articles',
                 , Field( 'description', 'string'
                         , required=True
                         , requires=IS_NOT_EMPTY()
-                        , widget=SQLFORM.widgets.text.widget
+                        , widget=ckeditor.widget, represent=lambda content, row: XML(content, sanitize=True)
                         )
                 , Field('created_on', 'datetime'
                     , default=request.now

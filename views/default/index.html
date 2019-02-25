@@ -10,16 +10,14 @@
 {{if auth.is_logged_in():}}
 <center style="padding:50px">
   <a class="btn btn-primary"   href="{{=URL('default','index')}}">{{=T("Home")}}</a>
-  <a class="btn btn-secondary" href="{{=URL('default','quickNotes')}}">{{=T("Quick Notes")}}</a>
+  <a class="btn btn-secondary" href="https://pewscomms.wordpress.com/">{{=T("PEWS Wordpress Blog page")}}</a>
   <!-- a class="btn btn-secondary" href="http://navayan.com">navayan.com</a -->
+  <a class="btn btn-secondary" href="{{=URL('default','quickNotes')}}">{{=T("Quick Notes")}}</a>
   <a class="btn btn-secondary" href="{{=URL('default','businesses')}}">{{=T('Businesses')}}</a>
   <a class="btn btn-secondary" href="{{=URL('default','jobs')}}">{{=T('Jobs')}}</a>
   <a class="btn btn-secondary" href="{{=URL('default','articles')}}">{{=T('Articles')}}</a>
   <a class="btn btn-secondary" href="{{=URL('default','user', 'logout')}}">{{=T('Logout')}}</a>
-
-    {{}}
   <a class="btn btn-secondary" href="{{=URL('default','members')}}">{{=T('Members')}}</a>
-    
 </center>
 {{else:}}
 <center style="padding:50px">

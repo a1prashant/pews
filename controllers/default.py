@@ -36,7 +36,7 @@ def grid():
 # ---- Embedded wiki (example) ----
 def wiki():
     auth.wikimenu() # add the wiki to the menu
-    return auth.wiki() 
+    return auth.wiki()
 
 # ---- Action for login/register/etc (required for auth) -----
 def user():
