@@ -177,7 +177,10 @@ db.define_table( 'quickNotes',
                     , comment="max 200 characters"
                     , required=True
                     , requires=IS_NOT_EMPTY()
-                    , widget=SQLFORM.widgets.text.widget
+                    , widget=ckeditor.widget
+                      , represent=lambda content
+                      , row: XML(content, sanitize=False)
+                      # , widget=SQLFORM.widgets.text.widget
                     )
                 , Field('created_on', 'datetime'
                     , default=request.now
@@ -254,7 +257,9 @@ db.define_table( 'jobs',
                 , Field( 'description', 'string'
                         , required=True
                         , requires=IS_NOT_EMPTY()
-                        , widget=ckeditor.widget, represent=lambda content, row: XML(content, sanitize=True)
+                        , widget=ckeditor.widget
+                        , represent=lambda content
+                        , row: XML(content, sanitize=False)
                         # , widget=SQLFORM.widgets.text.widget
                         )
                 , Field('created_on', 'datetime'
@@ -285,6 +290,8 @@ db.define_table( 'jobs',
                         )
                )
 
+
+
 db.define_table( 'articles',
                 Field( 'title', 'string'
                       , length=120
@@ -294,16 +301,14 @@ db.define_table( 'articles',
                 , Field( 'category'
                         , length=30
                         , required=True
-                        , requires=IS_IN_DB(db, 'article.domain_name')
-                        )
-                , Field( 'sub_category', 'string'
-                        , length=30
-                        , required=True
+                       # , requires=IS_IN_DB(db, 'article.domain_name')
                         )
                 , Field( 'description', 'string'
                         , required=True
                         , requires=IS_NOT_EMPTY()
-                        , widget=ckeditor.widget, represent=lambda content, row: XML(content, sanitize=True)
+                        , widget=ckeditor.widget
+                        , represent=lambda content
+                        , row: XML(content, sanitize=False)
                         )
                 , Field('created_on', 'datetime'
                     , default=request.now
@@ -319,14 +324,14 @@ db.define_table( 'articles',
                     , readable=False
                     )
                 , Field( 'selfAuthenticated', 'boolean'
-                        , label="Information given in this article is authenticate and is owned by me."
-                        , default=False
-                        , readable=False
-                       )
+                    , label="Information given in this article is authenticate and is owned by me."
+                    , default=False
+                    , readable=False
+                   )
                 , Field( 'canContactMe', 'boolean'
-                        , label="Can contact me for more details? (Your e-mail and/or mobile will be visible to viewer)"
-                        , default=False
-                        )
+                    , label="Can contact me for more details? (Your e-mail and/or mobile will be visible to viewer)"
+                    , default=False
+                    )
                )
 
 # the two fields 'created_on' and 'created_by' are problem for DRY

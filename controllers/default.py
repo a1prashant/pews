@@ -8,14 +8,28 @@
 def index():
     return dict(form=auth.login())
 
-@auth.requires_login()
-def quickNotes():
-    grid = SQLFORM.grid(db.quickNotes, user_signature=False)
+
+def termsOfUse():
     return locals()
 
 @auth.requires_login()
+def articles():
+    grid = SQLFORM.grid(db.articles, csv=False, deletable=False, editable=False) # , fields=['title', 'created_by'] )
+    return locals()
+
+@auth.requires_login()
+def quickNotes():
+    grid = SQLFORM.grid(db.quickNotes, csv=False, deletable=False, editable=False )
+    return locals()
+
+@auth.requires_login()
+def jobs_old():
+    grid = SQLFORM.grid(db.jobs, csv=False, deletable=False, editable=False)
+    return locals()
+
 def jobs():
-    grid = SQLFORM.grid(db.jobs, user_signature=False)
+    # not working - rows = db().select(db.jobs.ALL)
+    rows = db(db.jobs).select()
     return locals()
 
 # ---- API (example) -----
