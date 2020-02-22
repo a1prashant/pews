@@ -1,4 +1,5 @@
-# pews
+# pews (People's Education and Welfare Society)
+
 Home Page:
 	Profile | Logout
 	Quick Notes
